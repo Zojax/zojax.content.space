@@ -1,0 +1,22 @@
+<div id="z-space" i18n:domain="zojax.content.space">
+  <div class="z-space-header" tal:condition="layout/showHeader">
+    <h1 tal:content="layout/title"></h1>
+  </div>
+
+  <div class="z-space-views-wrapper" tal:condition="layout/workspaces">
+    <div class="z-space-views">
+      <ul tal:define="url layoutcontext/@@absolute_url">
+	<li tal:repeat="workspace layout/workspaces"
+	    tal:attributes="class python:workspace['selected'] and 'selected' or ''">
+	  <a tal:attributes="href string:$url/${workspace/name}/">
+	    <img tal:attributes="src workspace/icon/url"
+		 tal:condition="workspace/icon/url|nothing" />
+	    <tal:block tal:content="workspace/title" i18n:translate="" /></a>
+	</li>
+      </ul>
+    </div>
+  </div>
+  <div class="visualClear"></div>
+
+  <tal:block content="structure view/render" />
+</div>

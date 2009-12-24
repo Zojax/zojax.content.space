@@ -1,0 +1,122 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.content.space">
+
+  <include file="columns.zcml" />
+
+  <!-- layout -->
+  <zojax:layout
+     name="space"
+     layout="portal"
+     for="..interfaces.ISpace"
+     template="layout.pt"
+     class=".layout.SpaceLayout" />
+
+  <zojax:layout
+     name="workspace"
+     layout="space"
+     template="layoutworkspace.pt"
+     for="..interfaces.ISpace"
+     class=".layout.WorkspaceLayout" />
+
+  <zojax:layout
+     name="workspace"
+     layout="workspace"
+     template="layoutform.pt"
+     for="zojax.content.forms.interfaces.IEditContentWizard" />
+
+  <!-- space view -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IContentSpace" />
+
+  <browser:page
+     name="index.html"
+     for="..interfaces.IContentSpace"
+     class=".space.ContentSpace"
+     permission="zope.View" />
+
+  <!-- space publisher -->
+  <adapter
+     for="..interfaces.ISpace *"
+     factory="z3c.traverser.traverser.PluggableTraverser"
+     provides="zope.publisher.interfaces.IPublishTraverse" />
+
+  <subscriber
+     for="..interfaces.ISpace *"
+     provides="z3c.traverser.interfaces.ITraverserPlugin"
+     factory=".publisher.PublisherPlugin" />
+
+  <!-- content space settings -->
+  <zojax:pagelet
+     name="space"
+     type="form.subform"
+     for="..interfaces.IContentSpaceLayout
+	  zojax.content.forms.interfaces.IPresentationStep"
+     class=".layout.LayoutSettings"
+     permission="zojax.ModifyContent"
+     weight="0" />
+
+  <!-- content space workspaces -->
+  <zojax:pagelet
+     name="workspaces"
+     type="wizard.step"
+     for="..interfaces.IWorkspacesManagement
+	  zojax.content.forms.interfaces.IEditContentWizard"
+     class=".workspace.WorkspacesManagement"
+     permission="zojax.ModifyContent"
+     weight="110" />
+
+  <!-- overview workspace -->
+  <zojax:pagelet
+     name="overview"
+     for="..interfaces.IContentSpace"
+     template="overview.pt"
+     provides="..interfaces.IOverviewWorkspace"
+     permission="zope.View" />
+
+  <!-- space create action -->
+  <adapter
+     name="content.add"
+     factory=".actions.AddSpaceContentActions" />
+
+  <adapter
+     name="content.editspace"
+     provides="zojax.content.actions.interfaces.IEditContentAction"
+     factory=".actions.EditSpaceAction" />
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     file="icons/space.png"
+     for="..interfaces.IContentSpace" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="icons/space.png"
+     for="zojax.content.content_space" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="icons/space.png"
+     for="..interfaces.IOverviewWorkspace" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="icons/space.png"
+     for="..interfaces.IOverviewWorkspaceFactory" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="icons/contents.png"
+     for="..interfaces.IContentsRSSFeed" />
+
+  <!-- styles -->
+  <zojax:resourceinclude
+     name="zojax-content-space.css"
+     library="zojax"
+     type="stylesheet" file="styles.css" filetype="zrt" />
+
+</configure>

@@ -1,0 +1,148 @@
+=======
+CHANGES
+=======
+
+0.7.8 (Unreleased)
+
+- Added workspace enabled check to workspace layout
+
+
+0.7.7 (2009-11-19)
+------------------
+
+- Fixed content tag handler
+
+
+0.7.6 (2009-11-14)
+------------------
+
+- More smart workspaces management info get in space layout
+
+- Fixed z3c.form >= 2.0 comatibility
+
+
+0.7.5 (2009-10-06)
+------------------
+
+- Use "structure" for formatter
+
+- Added 'Workspaces' portlet
+
+
+0.7.4 (2009-09-15)
+------------------
+
+- Update recent content portlet cache on each content update
+
+
+0.7.3 (2009-08-27)
+------------------
+
+- Use 'Add ...' actions instead of 'Create ...'
+
+- Register 'Workspaces' wizard step for IWorkspacesManagement
+
+
+0.7.2 (2009-08-22)
+------------------
+
+- Fixed workspaces edit wizard step
+
+
+0.7.1 (2009-08-22)
+------------------
+
+- Fixed recent content portlet, RecentContentPortlet implements IRecentContentPortlet interface
+
+
+0.7.0 (2009-08-21)
+------------------
+
+- Added workspaces management
+
+- Use title based namechooser for ContentSpace
+
+- Use portlet modified cache tag
+
+- Handle content modification for IPortalType content for caching
+
+
+0.6.1 (2009-08-15)
+------------------
+
+- Handle exception in cache tag
+
+
+0.6.0 (2009-08-11)
+------------------
+
+- Added url mapper support (zojax.content.urlmapper)
+
+- Added orded awareness to content space
+
+- Useful utils getSpace and getWorkspace added
+
+- Use multi adapter to get IDraftContainer
+
+- Added portlet caching
+
+- Added 'get' method to IWorkspaceFactory interface
+
+- Removed DraftContentType class, use DraftedContentType instead from zojax.content.draft
+
+
+0.5.0 (2009-06-21)
+------------------
+
+- Added edit space action to workspace actions
+
+- Use newer personal profile api
+
+- Use newer content permissions api
+
+- Portlet managers change to with status
+
+- Disable copy for space
+
+- Disable copy/move for workspace
+
+- Copyright changed to 'Zope Foundation and Contributors'
+
+
+0.4.0 (2009-05-05)
+------------------
+
+- Fixed show space header without showing tabs
+
+- Change recent content rss feed description
+
+- Show only 'Portal Type' content in recent content portlet
+
+- Added custom create content actions for space,
+  show all workspace create content actions
+
+- Do not use custom portlets managers for overview workspace
+
+- Do not use z3c.autoinclude
+
+
+0.3.0 (2009-03-17)
+------------------
+
+- Added recent content rss feed
+
+- Added 'more' link to contents portlet
+
+- Update spaces portlet
+
+
+0.2.0 (2009-03-15)
+------------------
+
+- Fixed wrong import
+
+
+0.1.0 (2009-03-14)
+------------------
+
+- Initial release.

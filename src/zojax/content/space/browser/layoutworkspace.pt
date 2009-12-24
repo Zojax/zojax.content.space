@@ -1,0 +1,21 @@
+<div tal:condition="layout/wizard"
+     id="z-portal-workspace" tal:content="structure view/render"></div>
+<div id="space-columns" tal:condition="not:layout/wizard">
+  <table id="space-columns-table" cellspacing="0" cellpadding="0">
+    <tr tal:define="context nocall:layout/workspace">
+      <td id="space-column-one"
+	  tal:define="leftColumn provider:columns.left"
+	  tal:condition="leftColumn">
+	<div class="space-column-wrapper" tal:content="structure leftColumn"></div>
+      </td>
+      <td id="space-column-content">
+	<div id="z-portal-workspace" tal:content="structure view/render"></div>
+      </td>
+      <td id="space-column-two"
+	  tal:define="rightColumn provider:columns.right"
+	  tal:condition="rightColumn">
+	<div class="space-column-wrapper" tal:content="structure rightColumn"></div>
+      </td>
+    </tr>
+  </table>
+</div>

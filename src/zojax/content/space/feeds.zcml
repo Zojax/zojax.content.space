@@ -1,0 +1,16 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.content.space">
+
+  <adapter 
+     name="contents"
+     factory=".feeds.ContentsRSSFeed" />
+
+  <class class=".feeds.ContentsRSSFeed">
+    <require
+       permission="zope.View"
+       interface="zojax.content.feeds.interfaces.IFeed" />
+  </class>
+
+</configure>

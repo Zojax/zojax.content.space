@@ -1,0 +1,33 @@
+<div tal:attributes="class string:z-portlet ${context/cssclass}" i18n:domain="zojax.content.space">
+
+  <h2 class="z-portlet-header">
+    <a class="z-portlet-feed" title="RSS feed" i18n:attributes="title"
+       tal:condition="view/context/rssfeed"
+       tal:define="context nocall:view/context/context"
+       tal:attributes="href string:${context/@@absolute_url}/@@feeds/${view/context/rssfeed}">
+      <img tal:attributes="src context/++resource++rss-icon.png" />
+    </a>
+    <tal:block tal:content="context/title"></tal:block>
+  </h2>
+
+  <div class="z-portlet-body"
+       tal:define="contents context/listContents">
+    <div tal:repeat="content contents"
+	 tal:attributes="class python:repeat['content'].odd() and 'z-portlet-item even' or 'z-portlet-item odd'">
+      <span>
+	<tal:block content="structure content/icon" />
+	<a tal:attributes="href content/url" tal:content="content/title"></a>
+      </span>
+      <div class="z-portlet-item-details" i18n:translate="">
+	<tal:block i18n:name="date" content="structure content/date" /> in
+	<a i18n:name="space"
+	   tal:attributes="href content/spaceurl" tal:content="content/space"></a>
+      </div>
+    </div>
+    <div class="z-portlet-item odd" tal:condition="not:contents"
+	 tal:content="context/noContentsMessage"></div>
+  </div>
+  <div class="z-portlet-footer" tal:define="url context/getMoreLink" tal:condition="url">
+    <a tal:attributes="href url" i18n:translate="">More...</a>
+  </div>
+</div>

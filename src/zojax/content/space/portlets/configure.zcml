@@ -1,0 +1,107 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.content.space">
+
+  <!-- spaces -->
+  <zojax:portlet
+     title="Spaces"
+     name="portlet.spaces"
+     description="List of all spaces in site."
+     class=".spaces.SpacesPortlet"
+     provides=".interfaces.ISpacesPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="spaces.pt"
+     for=".interfaces.ISpacesPortlet" />
+
+  <!-- recent contents portlet -->
+  <zojax:portlet
+     title="Recent content"
+     name="portlet.recentcontent"
+     description="List of recent content in space and all sub spaces."
+     class=".content.RecentContentPortlet"
+     schema=".interfaces.IRecentContentPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="content.pt"
+     for=".interfaces.IRecentContentPortlet" />
+
+  <!-- recent contents portlet for content column -->
+  <zojax:portlet
+     title="Recent content"
+     name="portlet.recentcontent"
+     description="List of recent content in space and all sub spaces."
+     class=".content.ContentRecentContentPortlet"
+     manager=".interfaces.IContentPortletsManager"
+     schema=".interfaces.IContentRecentContentPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="recentcontent.pt"
+     for=".interfaces.IContentRecentContentPortlet" />
+
+  <subscriber handler=".cache.contentHandler" />
+  <subscriber for="zojax.content.type.interfaces.IPortalType
+                   zope.app.container.interfaces.IObjectAddedEvent"
+              handler=".cache.contentHandler" />
+  <subscriber for="zojax.content.type.interfaces.IPortalType
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".cache.contentHandler" />
+
+  <!-- workspaces -->
+  <zojax:portlet
+     title="Workspaces"
+     name="portlet.workspaces"
+     description="List of space workspaces."
+     for="..interfaces.ISpace"
+     class=".workspaces.WorkspacesPortlet"
+     schema=".interfaces.IWorkspacesPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="workspaces.pt"
+     for=".interfaces.IWorkspacesPortlet" />
+
+  <!-- central column portlets -->
+  <zojax:portletManager
+     name="columns.content"
+     title="Content column portlets"
+     for="..interfaces.IContentSpace"
+     schema=".interfaces.IContentPortletsManagerConfiguration"
+     provides=".interfaces.IContentPortletsManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <!-- left/right portlets managers -->
+  <zojax:portletManager
+     name="columns.left"
+     title="Left column portlets"
+     for="..interfaces.IContentSpace"
+     class="zojax.portlet.manager.PortletManagerWithStatus"
+     schema="zojax.portlet.interfaces.IPortletManagerWithStatus" />
+
+  <zojax:portletManager
+     name="columns.right"
+     title="Right column portlets"
+     for="..interfaces.IContentSpace"
+     class="zojax.portlet.manager.PortletManagerWithStatus"
+     schema="zojax.portlet.interfaces.IPortletManagerWithStatus" />
+
+  <zojax:portletManager
+     name="columns.left"
+     title="Left column portlets"
+     for="..interfaces.IWorkspace"
+     class="zojax.portlet.manager.PortletManagerWithStatus"
+     schema="zojax.portlet.interfaces.IPortletManagerWithStatus" />
+
+  <zojax:portletManager
+     name="columns.right"
+     title="Right column portlets"
+     for="..interfaces.IWorkspace"
+     class="zojax.portlet.manager.PortletManagerWithStatus"
+     schema="zojax.portlet.interfaces.IPortletManagerWithStatus" />
+
+ </configure>
