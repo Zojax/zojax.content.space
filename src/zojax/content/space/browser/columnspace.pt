@@ -1,0 +1,8 @@
+<tal:block tal:define="data view/query" i18n:domain="zojax.content.space">
+  <tal:block condition="data">
+    <tal:block content="structure data/space/@@zmi_icon" />
+    <a tal:attributes="href data/url" tal:content="data/title">Space Title</a>
+    <div tal:content="structure data/description">Space Description</div>
+  </tal:block>
+  <tal:block condition="not:data">---</tal:block>
+</tal:block>

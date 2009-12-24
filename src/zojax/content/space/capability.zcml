@@ -1,0 +1,36 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <!-- support extensions -->
+  <class class=".content.ContentSpace"
+	 zcml:condition="installed zojax.extensions">
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+  </class>
+
+  <!-- support sorting -->
+  <class class=".content.ContentSpace"
+	 zcml:condition="installed zojax.content.sorting">
+    <implements interface="zojax.content.sorting.interfaces.ISortable" />
+  </class>
+
+  <!-- container view models -->
+  <class class=".content.ContentSpace"
+	 zcml:condition="installed zojax.content.models.container">
+    <implements
+       interface="zojax.content.models.container.interfaces.IContainerModelsAware" />
+  </class>
+
+  <!-- tagging -->
+  <class class=".content.ContentSpace"
+	 zcml:condition="installed zojax.content.tagging">
+    <implements interface="zojax.content.tagging.interfaces.IContentTaggable" />
+  </class>
+
+  <!-- url mapper -->
+  <class class=".content.ContentSpace"
+	 zcml:condition="installed zojax.content.urlapper">
+    <implements interface="zojax.content.urlmapper.interfaces.IURLMappable" />
+  </class>
+
+</configure>

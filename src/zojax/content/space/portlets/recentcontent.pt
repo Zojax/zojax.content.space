@@ -1,0 +1,53 @@
+<div tal:attributes="class string:z-portlet portlet-recent-content ${context/cssclass}" i18n:domain="zojax.content.space">
+
+  <h2 class="z-portlet-header">
+    <a class="z-portlet-feed" title="RSS feed" i18n:attributes="title"
+       tal:condition="view/context/rssfeed"
+       tal:define="context nocall:view/context/context"
+       tal:attributes="href string:${context/@@absolute_url}/@@feeds/${view/context/rssfeed}">
+      <img tal:attributes="src context/++resource++rss-icon.png" />
+    </a>
+    <tal:block tal:content="context/title"></tal:block>
+  </h2>
+
+  <div class="z-portlet-body"
+       tal:define="contents context/listContents">
+    <table>
+      <tr tal:repeat="content contents"
+	  tal:attributes="class python:repeat['content'].odd() and 'even' or 'odd'">
+	<td class="t-icon">
+	  <img src="" tal:replace="structure content/icon" />
+	</td>
+	<td class="t-title">
+	  <a tal:attributes="href content/url" tal:content="content/title"></a>
+	  <div class="t-byline" i18n:translate="">
+	    <tal:block i18n:name="date" content="structure content/date" /> in
+	    <a i18n:name="space"
+	       tal:attributes="href content/spaceurl" tal:content="content/space"></a>
+	  </div>
+	  <div class="t-desc" tal:content="content/description">
+	  </div>
+	</td>
+	<td class="t-author">
+	  <tal:block condition="content/author">
+	    by
+            <a href="#" title="See author's profile" i18n:attributes="title"
+               tal:attributes="href content/profile" tal:content="content/author"
+               tal:omit-tag="not:content/profile"></a>
+	  </tal:block>
+        </td>
+	<td class="t-avatar">
+	  <div tal:condition="content/avatar">
+            <a href="#" tal:attributes="href content/profile"
+               tal:omit-tag="not:content/profile">
+              <img src="" tal:attributes="title content/author; src content/avatar" />
+            </a>
+	  </div>
+	</td>
+      </tr>
+    </table>
+    <div class="z-portlet-item odd" tal:condition="not:contents" i18n:translate="">
+      No content has been created yet.
+    </div>
+  </div>
+</div>

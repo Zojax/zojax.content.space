@@ -1,0 +1,18 @@
+<div class="z-portlet portlet-spaces" i18n:domain="zojax.content.space"
+     tal:define="spaces context/spaces; space python:spaces[0];
+		 icon space/space/@@zmi_icon">
+  <h2 class="z-portlet-header" i18n:translate="">
+    Spaces
+  </h2>
+  <div class="z-portlet-body">
+    <div class="z-portlet-item" tal:repeat="space context/spaces"
+	 tal:attributes="class python:repeat['space'].even() and 
+			 'z-portlet-item odd' or 'z-portlet-item even'">
+      <div tal:attributes="class string:z-level${space/level}">
+	<img tal:replace="structure icon" />
+	<span><a tal:content="space/title" tal:attributes="href space/url"></a></span>
+	<div tal:content="space/description"></div>
+      </div>
+    </div>
+  </div>
+</div>

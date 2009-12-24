@@ -1,0 +1,145 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.content.space">
+
+  <permission
+     id="zojax.AddContentSpace"
+     title="Add content space"
+     description="Allow add content space." />
+
+  <interface
+     name="content.rootspace"
+     interface=".interfaces.IRootSpaceType"
+     type="zojax.content.type.interfaces.IContentTypeType" />
+
+  <interface
+     name="content.space"
+     interface=".interfaces.IContentSpaceType"
+     type="zojax.content.type.interfaces.IContentTypeType" />
+
+  <interface
+     name="content.spacecontent"
+     interface=".interfaces.ISpaceContentType"
+     type="zojax.content.type.interfaces.IContentTypeType" />
+
+  <zojax:content
+     title="Space"
+     name="content.space"
+     class=".content.ContentSpace"
+     schema=".interfaces.IContentSpace"
+     containers=".interfaces.IContentSpaceType"
+     contains=".interfaces.IContentSpaceType
+               .interfaces.ISpaceContentType"
+     ctclass="zojax.content.draft.contenttype.DraftedContentType"
+     type=".interfaces.IContentSpaceType
+	   zojax.content.type.interfaces.IActivePortalType"
+     description="A content space which can contain other items."
+     permission="zojax.AddContentSpace" />
+
+  <class class=".content.ContentSpace">
+    <implements interface=".interfaces.IContentSpaceLayout" />
+    <implements interface="zojax.ownership.interfaces.IOwnerAware" />
+    <implements interface="zojax.catalog.interfaces.ISearchContext" />
+    <implements interface="zojax.content.type.interfaces.IShareableContent" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IAnnotatableOrder" />
+    <implements interface="zojax.content.type.interfaces.ITitleBasedName" />
+    <implements
+       interface="zojax.content.type.interfaces.IContainerContentsAware" />
+    <implements
+       interface="zojax.content.draft.browser.interfaces.ILocationContainer" />
+
+    <require
+       permission="zope.View"
+       interface=".interfaces.IContentSpace
+		  .interfaces.IContentSpaceLayout
+		  .interfaces.IWorkspacesManagement
+		  zope.app.container.interfaces.IReadContainer" />
+    <require
+       permission="zojax.ModifyContent"
+       set_schema=".interfaces.IContentSpace
+		   .interfaces.IContentSpaceLayout
+		   .interfaces.IWorkspacesManagement"
+       interface="zope.app.container.interfaces.IWriteContainer" />
+  </class>
+
+  <zojax:draft
+     content="content.space"
+     publish="zojax.AddContentSpace" />
+
+  <subscriber
+     for=".interfaces.ISpace
+	  zope.app.container.interfaces.IObjectAddedEvent"
+     handler=".utils.createWorkspaces" />
+  
+  <subscriber
+     for=".interfaces.ISpace
+	  zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+     handler=".utils.createWorkspaces" />
+
+  <!-- overview workspace -->
+  <adapter
+     name="overview"
+     factory=".overview.OverviewWorkspaceFactory" />
+
+  <class class=".overview.OverviewWorkspaceFactory">
+    <require
+       permission="zope.View"
+       interface=".interfaces.IOverviewWorkspace" />
+  </class>
+
+  <!-- permissions -->
+  <zojax:permission
+     permission="zojax.AddContentSpace"
+     category="zojax.content.permissions.interfaces.IAddPermission" />
+
+  <zojax:contentpermission
+     contenttype="content.space"
+     permission="zojax.AddContentSpace"
+     managepermission="zojax.ManageContentPermission"
+     class="zojax.content.permissions.content.ContentPermission"
+     category="zojax.content.permissions.interfaces.IAddPermission" />
+
+  <subscriber
+     factory=".permission.spacePermissionContentTypes"
+     provides="zojax.content.permissions.interfaces.IPermissionContentTypes" />
+
+  <!-- disable copier for space -->
+  <adapter
+     for=".interfaces.ISpace"
+     factory=".workspace.WorkspaceCopier" />
+
+  <!-- disable copier and mover for workspace -->
+  <adapter factory=".workspace.WorkspaceMover" />
+  <adapter factory=".workspace.WorkspaceCopier" />
+
+  <!-- vocabularies -->
+  <utility
+     name="content.space.workspaces"
+     factory=".vocabulary.Workspaces" />
+
+  <utility
+     name="content.space.enabledworkspaces"
+     factory=".vocabulary.EnabledWorkspaces" />
+
+  <!-- indexes -->
+  <include file="indexes.zcml" />
+
+  <!-- capabilities -->
+  <include file="capability.zcml" />
+
+  <!-- rss feeds -->
+  <include file="feeds.zcml" />
+
+  <!-- portlets -->
+  <include package=".portlets" />
+
+  <!-- browser views -->
+  <include package=".browser" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales" />
+
+</configure>

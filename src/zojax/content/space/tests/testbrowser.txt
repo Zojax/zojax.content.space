@@ -1,0 +1,284 @@
+=============
+Browser tests
+=============
+
+    >>> from zope import component, interface, event
+    >>> from zope.interface import verify
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.app.security.interfaces import IAuthentication
+    >>> from zojax.content.space import interfaces
+    >>> from zojax.content.space.content import ContentSpace
+
+    >>> root = getRootFolder()
+    >>> setSite(root)
+
+
+Verify contract implementation
+
+    >>> verify.verifyClass(interfaces.IContentSpace, ContentSpace)
+    True
+
+    >>> verify.verifyObject(interfaces.IContentSpace, root['space'])
+    True
+
+
+Admin browser
+
+    >>> admin = Browser()
+    >>> admin.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> admin.handleErrors = False
+
+Space contains of pluggable workspaces, by default 'overview'
+workspace is enabled and set as default
+
+    >>> admin.open('http://localhost/space/')
+    >>> print admin.contents
+    <html>
+    ...
+    <div class="z-space-header">
+        <h1>Space</h1>
+    </div>
+    ...
+    <li class="selected">
+       <a href="http://localhost/space/overview/">
+         <img src="..." />
+         Overview</a>
+    </li>
+    ...
+    <div class="z-portlet-item odd">
+       No content has been created yet.
+    </div>
+    ...
+    </html>
+
+To create new workspace we need register workspace factory.
+
+    >>> from zojax.content.space.tests.workspace import TestWorkspaceFactory
+    >>> root.getSiteManager().registerAdapter(TestWorkspaceFactory, name='test')
+
+    >>> admin.reload()
+    >>> 'Test workspace' in admin.contents
+    False
+
+    >>> admin.open('http://localhost/space/context.html')
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = [
+    ...     "test"]
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+    >>> admin.getLink('View').click()
+    >>> print admin.contents
+    <html>
+    ...
+    <div class="z-space-header">
+        <h1>Space</h1>
+    </div>
+    ...
+    <div class="z-space-views">
+       <ul>
+          <li class="selected">
+             <a href="http://localhost/space/test/">
+               Test workspace</a>
+          </li>
+       </ul>
+    </div>
+    ...
+    </html>
+
+
+Manager checks isAvailable factory's method. let's register workspace
+that is not available.
+
+    >>> from zojax.personal.space.tests.workspace import TestWorkspaceFactory2
+    >>> root.getSiteManager().registerAdapter(TestWorkspaceFactory2, name='test2')
+
+    >>> TestWorkspaceFactory2(None).isAvailable()
+    False
+
+    >>> admin.open('http://localhost/space/context.html/content/')
+    >>> 'test2' in admin.contents
+    False
+
+
+Enable/disable title and tabs
+
+    >>> admin.open('http://localhost/space/context.html/presentation/')
+    >>> admin.getControl(name="content.space.widgets.showTabs:list").value = ['false']
+    >>> admin.getControl(name="content.space.widgets.showHeader:list").value = ['false']
+    >>> admin.getControl(name="content.space.buttons.save").click()
+
+    >>> actor = Browser()
+    >>> actor.open('http://localhost/space/')
+    >>> '<div class="z-space-header">' in actor.contents
+    False
+    >>> '<div class="z-space-views">' in actor.contents
+    False
+
+    >>> admin.getControl(name="content.space.widgets.showTabs:list").value = ['false']
+    >>> admin.getControl(name="content.space.widgets.showHeader:list").value = ['true']
+    >>> admin.getControl(name="content.space.buttons.save").click()
+
+    >>> actor = Browser()
+    >>> actor.open('http://localhost/space/')
+    >>> '<div class="z-space-header">' in actor.contents
+    True
+    >>> '<div class="z-space-views">' in actor.contents
+    False
+
+    >>> admin.getControl(name="content.space.widgets.showTabs:list").value = ['true']
+    >>> admin.getControl(name="content.space.widgets.showHeader:list").value = ['true']
+    >>> admin.getControl(name="content.space.buttons.save").click()
+
+
+Disable workspace
+
+    >>> admin.open('http://localhost/space/context.html')
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = [
+    ...     'overview']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+    >>> admin.getLink('View').click()
+    >>> print admin.contents
+    <html>
+    ...
+    <div class="z-space-header">
+        <h1>Space</h1>
+    </div>
+    ...
+    <div class="z-space-views">
+       <ul>
+          <li class="selected">
+             <a href="http://localhost/space/overview/">
+                <img src="http://localhost/@@/zojax-content-space-interfaces-IOverviewWorkspaceFactory-zmi_icon.png" />
+                Overview</a>
+          </li>
+       </ul>
+    </div>
+    ...
+    </html>
+
+
+Default workspace
+
+    >>> admin.open('http://localhost/space/context.html')
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = [
+    ...     'overview', 'test']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+    >>> admin.getControl('Default workspace').value = ['test']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+
+    >>> admin.open('http://localhost/space/')
+    >>> print admin.url
+    http://localhost/space/test/
+
+
+    >>> admin.open('http://localhost/space/context.html')
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = [
+    ...     'overview']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+
+    >>> admin.open('http://localhost/space/')
+    >>> print admin.url
+    http://localhost/space/overview/
+
+
+Actions
+
+    >>> admin.open('http://localhost/space/context.html')
+    >>> admin.getLink('Workspaces').click()
+    >>> admin.getControl(name="workspaces.widgets.workspaces:list").value = [
+    ...     'overview', 'test']
+    >>> admin.getControl('Default workspace').value = ['overview']
+    >>> admin.getControl(name="content.edit.buttons.save").click()
+
+    >>> admin.open('http://localhost/space/context.html/presentation/pm-columns.left/?form.widgets.portletIds:list=portlet.actions&form.widgets.status:list=1&form.buttons.save=1')
+
+    >>> admin.open('http://localhost/space/')
+    >>> print admin.contents
+    <html>
+    ...
+    <h2 class="z-portlet-header">Actions</h2>
+      <div class="z-portlet-body">
+        <div class="z-portlet-item">
+          <h5 class="z-portlet-item-title">Add content</h5>
+          <ul class="z-listing">
+            <li class="even">
+               <a href="http://localhost/space/+/content.space/">
+               <img ... />
+               Add Space</a>
+            </li> <li class="odd">
+               <a href="http://localhost/space/test/+/test.content/">
+               <img ... />
+               Add Test content</a>
+            </li> <li class="even">
+               <a href="http://localhost/space/test/+/test.content2/">
+               <img ... />
+               Add Test content 2</a>
+            </li>
+          </ul>
+        </div> <div class="z-portlet-item">
+          <h5 class="z-portlet-item-title">Manage content</h5>
+          <ul class="z-listing">
+            <li class="even">
+               <a href="http://localhost/space/context.html">
+               <img ... />
+               Edit Space</a>
+            </li> <li class="odd">
+               <a href="http://localhost/space/delete.html">
+               <img ... />
+               Delete Space</a>
+            </li>
+          </ul>
+        </div> <div class="z-portlet-item">
+          <h5 class="z-portlet-item-title">Notifications</h5>
+          <ul class="z-listing">
+            <li class="even">
+               <a href="http://localhost/space/@@feeds/">
+               <img ... />
+               Subscribe to Feeds</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    ...
+    </html>
+
+
+Edit space action
+
+    >>> admin.open('http://localhost/space/test/')
+    >>> print admin.contents
+    <html>
+    ...
+    <div class="z-portlet-item">
+      <h5 class="z-portlet-item-title">Manage content</h5>
+      <ul class="z-listing">
+        <li class="even">
+           <a href="http://localhost/space/context.html">
+           <img ... />
+           Edit Space</a>
+        </li> <li class="odd">
+           <a href="http://localhost/space/test/context.html">
+           <img ... />
+           Edit Test workspace</a>
+        </li> <li class="even">
+           <a href="http://localhost/space/test/delete.html">
+           <img ... />
+           Delete Test workspace</a>
+        </li>
+      </ul>
+    </div>
+    ...
+    </html>
+
+
+Permission
+
+    >>> admin.open('http://localhost/space/context.html/security/')
+
+
+Cleanup
+
+    >>> setSite(None)

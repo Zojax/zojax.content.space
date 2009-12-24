@@ -1,0 +1,23 @@
+<div class="z-portlet portlet-workspaces" i18n:domain="zojax.content.space"
+     tal:define="desc context/descriptions;
+		 url context/context/@@absolute_url">
+  <h2 class="z-portlet-header" i18n:translate="">
+    Workspaces
+  </h2>
+  <div class="z-portlet-body">
+    <div class="z-portlet-item" tal:repeat="ws context/wfs"
+	 tal:attributes="class python:repeat['ws'].even() and 
+			 'z-portlet-item odd' or 'z-portlet-item even'">
+      <img tal:replace="structure ws/icon" />
+      <tal:block condition="desc">
+	<span><a tal:content="ws/title"
+		 tal:attributes="href string:$url/${ws/name}/"></a></span>
+	<div tal:content="ws/description"></div>
+      </tal:block>
+      <tal:block condition="not:desc">
+	<a tal:content="ws/title"
+	   tal:attributes="href string:$url/${ws/name}/"></a>
+      </tal:block>
+    </div>
+  </div>
+</div>

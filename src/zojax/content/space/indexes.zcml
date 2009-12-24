@@ -1,0 +1,15 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   i18n_domain="zojax.content.space">
+
+  <utility
+     name="contentSpace"
+     component=".indexes.contentSpace"
+     provides="zojax.catalog.interfaces.ICatalogIndexFactory" />
+
+  <utility
+     name="contentSpaces"
+     component=".indexes.contentSpaces"
+     provides="zojax.catalog.interfaces.ICatalogIndexFactory" />
+
+</configure>
