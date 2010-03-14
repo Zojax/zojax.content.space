@@ -22,7 +22,7 @@ from zojax.content.space.interfaces import \
     IWorkspaceFactory, IWorkspace, ISpace
 
 
-def createWorkspaces(space, event):
+def createWorkspaces(space, event=None):
     if IDraftedContent.providedBy(space):
         return
 
