@@ -26,7 +26,7 @@ from zope.security.proxy import removeSecurityProxy
 
 from zojax.catalog.interfaces import ICatalog
 
-from zojax.content.space.interfaces import \
+from zojax.content.space.interfaces import _, \
     ISpace, IWorkspaceFactory, IInactiveWorkspaceFactory
 from zojax.content.space.utils import getSpace
 
