@@ -34,7 +34,7 @@
                .interfaces.ISpaceContentType"
      ctclass="zojax.content.draft.contenttype.DraftedContentType"
      type=".interfaces.IContentSpaceType
-	   zojax.content.type.interfaces.IActivePortalType"
+     zojax.content.type.interfaces.IActivePortalType"
      description="A content space which can contain other items."
      permission="zojax.AddContentSpace" />
 
@@ -54,14 +54,14 @@
     <require
        permission="zope.View"
        interface=".interfaces.IContentSpace
-		  .interfaces.IContentSpaceLayout
-		  .interfaces.IWorkspacesManagement
-		  zope.app.container.interfaces.IReadContainer" />
+      .interfaces.IContentSpaceLayout
+      .interfaces.IWorkspacesManagement
+      zope.app.container.interfaces.IReadContainer" />
     <require
        permission="zojax.ModifyContent"
        set_schema=".interfaces.IContentSpace
-		   .interfaces.IContentSpaceLayout
-		   .interfaces.IWorkspacesManagement"
+       .interfaces.IContentSpaceLayout
+       .interfaces.IWorkspacesManagement"
        interface="zope.app.container.interfaces.IWriteContainer" />
   </class>
 
@@ -71,12 +71,12 @@
 
   <subscriber
      for=".interfaces.ISpace
-	  zope.app.container.interfaces.IObjectAddedEvent"
+    zope.app.container.interfaces.IObjectAddedEvent"
      handler=".utils.createWorkspaces" />
-  
+
   <subscriber
      for=".interfaces.ISpace
-	  zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
      handler=".utils.createWorkspaces" />
 
   <!-- overview workspace -->
@@ -123,6 +123,10 @@
   <utility
      name="content.space.enabledworkspaces"
      factory=".vocabulary.EnabledWorkspaces" />
+
+  <utility
+     name="content.space.spaces"
+     factory=".vocabulary.SpacesVocabulary" />
 
   <!-- indexes -->
   <include file="indexes.zcml" />
