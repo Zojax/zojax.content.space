@@ -19,7 +19,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.traversing.api import getParents
 from zope.traversing.interfaces import IContainmentRoot
 from zope import interface
-from zope.component import getAdapters, queryUtility
+from zope.component import getAdapters, queryUtility, getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from zope.security.proxy import removeSecurityProxy
