@@ -78,7 +78,7 @@ class SpacesVocabulary(object):
         ids = getUtility(IIntIds, context=context)
         root = context
         while root is not None and not IContainmentRoot.providedBy(root):
-            if not ISpace.providedBy(root.__parent__):
+            if root.__parent__ is None or not ISpace.providedBy(root.__parent__):
                 break
             root = root.__parent__
         for space in catalog.searchResults(type={'any_of':('content.space',
