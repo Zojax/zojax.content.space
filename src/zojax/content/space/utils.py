@@ -16,6 +16,7 @@
 $Id$
 """
 from zope.component import getAdapters
+from zope.traversing.api import getParents
 from zope.security.proxy import removeSecurityProxy
 from zojax.content.type.interfaces import IDraftedContent
 from zojax.content.space.interfaces import \
@@ -43,6 +44,13 @@ def getSpace(ob, default=None):
         if ob is None:
             return default
     return ob
+
+
+def getSpacePath(ob, reversed=False):
+    path = [ob] + getParents(ob)
+    if reversed:
+        path.reverse()
+    return filter(ISpace.providedBy, path)
 
 
 def getWorkspace(ob):
