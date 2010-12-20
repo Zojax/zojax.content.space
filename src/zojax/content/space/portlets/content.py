@@ -24,7 +24,7 @@ from zope.lifecycleevent import IObjectModifiedEvent
 
 from zojax.catalog.interfaces import ICatalog
 from zojax.formatter.utils import getFormatter
-from zojax.content.type.interfaces import IContentViewView
+from zojax.content.type.interfaces import IContentViewView, IItem
 from zojax.ownership.interfaces import IOwnership
 from zojax.principal.profile.interfaces import IPersonalProfile
 
@@ -79,10 +79,11 @@ class RecentContentPortlet(object):
                 url = '%s/'%absoluteURL(document, request)
 
             space = getSpace(document, context)
+            item = IItem(document, None)
 
             docs.append({'url': url,
-                         'title': getattr(document, 'title', document.__name__),
-                         'description': getattr(document, 'description', u''),
+                         'title': getattr(item, 'title', document.__name__),
+                         'description': getattr(item, 'description', u''),
                          'date': formatter.format(IDCTimes(document).modified),
                          'icon': queryMultiAdapter(
                                    (document, request), name='zmi_icon'),
