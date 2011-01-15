@@ -21,6 +21,7 @@ from zope.component import getUtility
 from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 
+from zojax.content.type.interfaces import IItem
 from zojax.content.feeds.rss2 import RSS2Feed
 from zojax.catalog.interfaces import ICatalog
 from zojax.ownership.interfaces import IOwnership
@@ -48,6 +49,7 @@ class ContentsRSSFeed(RSS2Feed):
             isDraft={'any_of': (False,)})
 
         for item in results:
+            item = IItem(item)
             url = absoluteURL(item, request)
 
             info = {
