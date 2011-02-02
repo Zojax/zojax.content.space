@@ -21,6 +21,7 @@ from zope.app.component.hooks import getSite
 from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 from zope.lifecycleevent import IObjectModifiedEvent
+from zope.app.intid.interfaces import IIntIds
 
 from zojax.catalog.interfaces import ICatalog
 from zojax.formatter.utils import getFormatter
@@ -46,7 +47,7 @@ class RecentContentPortlet(object):
     rssfeed = 'contents'
     cssclass = 'portlet-recent-content'
     noContentsMessage = _('No content has been created yet.')
-
+    
     def __init__(self, context, request, view, manager):
         context = getSpace(context, getSite())
 
@@ -62,12 +63,30 @@ class RecentContentPortlet(object):
         context = self.context
         request = self.request
         catalog = getUtility(ICatalog)
+        ids = getUtility(IIntIds)
         formatter = getFormatter(request, 'humanDatetime', 'medium')
 
         query = {'traversablePath': {'any_of':(context,)},
                  'sort_order': 'reverse',
                  'sort_on': 'modified',
                  'isDraft': {'any_of': (False,)}}
+        
+        if '__all__' in self.types:
+            query['typeType']={'any_of': ('Portal type',)}
+        else:
+            query['type']={'any_of': self.types}
+        
+        try:
+            local_context = self.manager.view.maincontext
+        except AttributeError:
+            local_context = context
+            
+        if self.spaceMode == 2:
+            query['contentSpace'] = {'any_of': [ids.queryId(getSpace(local_context))] }
+            del query['traversablePath']
+        elif self.spaceMode == 3:
+            query['traversablePath'] = {'any_of':(getSpace(local_context),)}
+                
         query.update(self.extraParameters())
 
         docs = []

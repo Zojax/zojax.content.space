@@ -20,6 +20,9 @@ from zojax.content.space.interfaces import _
 from zojax.portlet.interfaces import _ as pMsg
 from zojax.portlet.interfaces import \
     IPortletManagerWithStatus, ENABLED, statusVocabulary
+from zojax.widget.radio.field import RadioChoice
+
+from zojax.portlets.recent.vocabulary import spaceModesVocabulary
 
 
 class IContentPortletsManager(interface.Interface):
@@ -50,6 +53,20 @@ class IRecentContentPortlet(interface.Interface):
     """ recent contents portlet """
 
     rssfeed = interface.Attribute('rss feed')
+    
+    types = schema.List(
+        title = _(u'Portal types'),
+        description = _('Portal types to list in portlet.'),
+        value_type = schema.Choice(
+            vocabulary='zojax.portlets.recent-portaltypes'),
+        default = ['__all__'],
+        required = True)
+    
+    spaceMode = RadioChoice(
+        title = _(u'Space mode'),
+        default = 1,
+        vocabulary=spaceModesVocabulary,
+        required = True)
 
     number = schema.Int(
         title = _(u'Number of items'),
