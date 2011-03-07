@@ -22,8 +22,6 @@ from zojax.portlet.interfaces import \
     IPortletManagerWithStatus, ENABLED, statusVocabulary
 from zojax.widget.radio.field import RadioChoice
 
-from zojax.portlets.recent.vocabulary import spaceModesVocabulary
-
 
 class IContentPortletsManager(interface.Interface):
     """ content column portlets manager """
@@ -65,7 +63,7 @@ class IRecentContentPortlet(interface.Interface):
     spaceMode = RadioChoice(
         title = _(u'Space mode'),
         default = 1,
-        vocabulary=spaceModesVocabulary,
+        vocabulary='zojax.portlets.recent-spacemodes',
         required = True)
 
     number = schema.Int(
