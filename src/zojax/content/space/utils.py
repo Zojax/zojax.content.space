@@ -11,6 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from zojax.catalog.interfaces import ICatalog
 """
 
 $Id$
@@ -59,3 +60,9 @@ def getWorkspace(ob):
         if ob is None:
             return
     return ob
+
+def getSubspaces(space):
+    return getUtility(ICatalog).searchResults(
+            searchContext=space,
+            type={'any_of': ('content.space',)},
+            isDraft={'any_of': (False,)})
