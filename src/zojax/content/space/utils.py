@@ -11,15 +11,16 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from zojax.catalog.interfaces import ICatalog
 """
 
 $Id$
 """
-from zope.component import getAdapters
+from zope.component import getAdapters, getUtility
 from zope.traversing.api import getParents
 from zope.security.proxy import removeSecurityProxy
 from zojax.content.type.interfaces import IDraftedContent
+from zojax.catalog.interfaces import ICatalog
+
 from zojax.content.space.interfaces import \
     IWorkspaceFactory, IWorkspace, ISpace
 
