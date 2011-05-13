@@ -52,6 +52,12 @@ class IRecentContentPortlet(interface.Interface):
 
     rssfeed = interface.Attribute('rss feed')
     
+    label = schema.TextLine(
+        title = _(u'Label'),
+        default = u'',
+        required = False)
+
+    
     types = schema.List(
         title = _(u'Portal types'),
         description = _('Portal types to list in portlet.'),
