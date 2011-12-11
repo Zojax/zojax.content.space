@@ -11,7 +11,7 @@
 	  <a tal:attributes="href string:$url/${workspace/name}/">
 	    <img tal:attributes="src workspace/icon/url"
 		 tal:condition="workspace/icon/url|nothing" />
-	    <tal:block tal:content="workspace/title" i18n:translate="" /></a>
+	    <tal:block tal:content="workspace/title" /></a>
 	</li>
       </ul>
     </div>
