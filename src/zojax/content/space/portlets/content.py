@@ -39,6 +39,7 @@ from zojax.content.space.interfaces import _, ISpace
 
 from cache import ContentTag
 from interfaces import IRecentContentPortlet, IContentRecentContentPortlet
+from zope.security.proxy import removeSecurityProxy
 
 
 class RecentContentPortlet(object):
@@ -47,7 +48,7 @@ class RecentContentPortlet(object):
     rssfeed = 'contents'
     cssclass = 'portlet-recent-content'
     noContentsMessage = _('No content has been created yet.')
-    
+
     def __init__(self, context, request, view, manager):
         context = getSpace(context, getSite())
 
@@ -70,23 +71,23 @@ class RecentContentPortlet(object):
                  'sort_order': 'reverse',
                  'sort_on': 'modified',
                  'isDraft': {'any_of': (False,)}}
-        
+
         if '__all__' in self.types:
             query['typeType']={'any_of': ('Portal type',)}
         else:
             query['type']={'any_of': self.types}
-        
+
         try:
             local_context = self.manager.view.maincontext
         except AttributeError:
             local_context = context
-            
+
         if self.spaceMode == 2:
-            query['contentSpace'] = {'any_of': [ids.queryId(getSpace(local_context))] }
+            query['contentSpace'] = {'any_of': [ids.queryId(removeSecurityProxy(getSpace(local_context)))] }
             del query['traversablePath']
         elif self.spaceMode == 3:
             query['traversablePath'] = {'any_of':(getSpace(local_context),)}
-                
+
         query.update(self.extraParameters())
 
         docs = []
