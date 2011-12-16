@@ -1,0 +1,227 @@
+##############################################################################
+#
+# Copyright (c) 2003-2004 Zope Corporation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Sun Dec 11 10:51:27 2011\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/content/space/browser/columns.py:36
+#: src/zojax/content/space/configure.zcml:27
+msgid "Space"
+msgstr ""
+
+#: src/zojax/content/space/browser/layout.py:35
+msgid "Space layout"
+msgstr ""
+
+#: src/zojax/content/space/browser/workspace.py:34
+#: src/zojax/content/space/interfaces.py:62
+#: src/zojax/content/space/portlets/interfaces.py:102
+#: src/zojax/content/space/portlets/configure.zcml:56
+#: src/zojax/content/space/portlets/workspaces.pt:4
+msgid "Workspaces"
+msgstr ""
+
+#: src/zojax/content/space/browser/workspace.py:35
+msgid "Workspaces management"
+msgstr ""
+
+#: src/zojax/content/space/configure.zcml:27
+msgid "A content space which can contain other items."
+msgstr ""
+
+#: src/zojax/content/space/configure.zcml:7
+msgid "Allow add content space."
+msgstr ""
+
+#: src/zojax/content/space/configure.zcml:7
+msgid "Add content space"
+msgstr ""
+
+#: src/zojax/content/space/feeds.py:39
+#: src/zojax/content/space/portlets/configure.zcml:21
+#: src/zojax/content/space/portlets/configure.zcml:34
+msgid "Recent content"
+msgstr ""
+
+#: src/zojax/content/space/feeds.py:40
+msgid "List of recently changed content."
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:100
+msgid "Show space tabs"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:101
+msgid "Space Tabs represent space workspaces, such as Documents, Photos, Blog, etc."
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:106
+msgid "Show space header"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:33
+msgid "Title"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:34
+msgid "Space title."
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:40
+msgid "Description"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:41
+msgid "Small description of space."
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:63
+#: src/zojax/content/space/portlets/interfaces.py:103
+msgid "Select workspaces for this space."
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:69
+msgid "Workspaces sorting and visibility"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:70
+msgid "Configure what workspaces have to be shown and in what order"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:77
+msgid "Default workspace"
+msgstr ""
+
+#: src/zojax/content/space/interfaces.py:78
+msgid "Select default workspace for this space."
+msgstr ""
+
+#: src/zojax/content/space/overview.py:29
+#: src/zojax/content/space/overview.py:37
+msgid "Overview"
+msgstr ""
+
+#: src/zojax/content/space/overview.py:38
+msgid "Space customizable overview."
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:21
+#: src/zojax/content/space/portlets/configure.zcml:34
+msgid "List of recent content in space and all sub spaces."
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:56
+msgid "List of space workspaces."
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:70
+msgid "Content column portlets"
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:79
+#: src/zojax/content/space/portlets/configure.zcml:93
+msgid "Left column portlets"
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:8
+msgid "List of all spaces in site."
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:8
+#: src/zojax/content/space/portlets/spaces.pt:4
+msgid "Spaces"
+msgstr ""
+
+#: src/zojax/content/space/portlets/configure.zcml:86
+#: src/zojax/content/space/portlets/configure.zcml:100
+msgid "Right column portlets"
+msgstr ""
+
+#: src/zojax/content/space/portlets/content.pt:23
+#: src/zojax/content/space/portlets/recentcontent.pt:25
+msgid "${date} in ${space}"
+msgstr ""
+
+#: src/zojax/content/space/portlets/content.pt:31
+msgid "More..."
+msgstr ""
+
+#: src/zojax/content/space/portlets/content.pt:4
+#: src/zojax/content/space/portlets/recentcontent.pt:4
+msgid "RSS feed"
+msgstr ""
+
+#: src/zojax/content/space/portlets/content.py:49
+#: src/zojax/content/space/portlets/recentcontent.pt:49
+msgid "No content has been created yet."
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:34
+msgid "Portlets"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:56
+msgid "Label"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:62
+msgid "Portal types"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:63
+msgid "Portal types to list in portlet."
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:70
+msgid "Space mode"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:76
+#: src/zojax/content/space/portlets/interfaces.py:86
+msgid "Number of items"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:77
+#: src/zojax/content/space/portlets/interfaces.py:87
+msgid "Number of items to display"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:96
+msgid "Show dscriptions"
+msgstr ""
+
+#: src/zojax/content/space/portlets/interfaces.py:97
+msgid "Show workspaces descriptions."
+msgstr ""
+
+#: src/zojax/content/space/portlets/recentcontent.pt:34
+msgid "See author's profile"
+msgstr ""
+
+#: src/zojax/content/space/tests/workspace.pt:1
+msgid "Yoy are in test workspace."
+msgstr ""
+
+#: src/zojax/content/space/vocabulary.py:95
+msgid "All Spaces"
+msgstr ""
+
