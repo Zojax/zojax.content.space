@@ -113,7 +113,6 @@
 
   <!-- disable copier and mover for workspace -->
   <adapter factory=".workspace.WorkspaceMover" />
-  <adapter factory=".workspace.WorkspaceCopier" />
 
   <!-- vocabularies -->
   <utility
