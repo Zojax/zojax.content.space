@@ -59,19 +59,13 @@ Workspaces portlet
     >>> print admin.contents
     <html>
     ...
-    <td id="space-column-one">
-       <div class="space-column-wrapper"><div class="z-portlet portlet-workspaces">
       <h2 class="z-portlet-header">
         Workspaces
       </h2>
       <div class="z-portlet-body">
         <div class="z-portlet-item odd">
           <img src="http://localhost/@@/zojax-content-space-interfaces-IOverviewWorkspaceFactory-zmi_icon.png" alt="OverviewWorkspaceFactory" width="16" height="16" border="0" />
-        <a href="http://localhost/space/overview/">Overview</a>
-      </div>
-      </div>
-      </div></div>
-    </td>
+    	<a href="http://localhost/space/overview/">Overview</a>
     ...
     </html>
 
@@ -87,17 +81,14 @@ Recent content portlet
     >>> print admin.contents
     <html>
     ...
-    <h2 class="z-portlet-header">
-      <a class="z-portlet-feed" title="RSS feed" href="http://localhost/space/@@feeds/contents">
-        <img src="http://localhost/@@/rss-icon.png" />
-      </a>
-      Recent content
-    </h2>
-    <div class="z-portlet-body">
-       <div class="z-portlet-item odd">No content has been created yet.</div>
-    </div>
+      <div class="z-portlet-body">
+    <BLANKLINE>
+        <div class="z-portlet-item odd">No content has been created yet.</div>
+      </div>
     ...
     </html>
+
+
 
     >>> admin.getLink('Add Test content').click()
     >>> admin.getControl('Title').value = 'Content 1'
@@ -107,26 +98,15 @@ Recent content portlet
     >>> print admin.contents
     <html>
     ...
-    <h2 class="z-portlet-header">
-      <a class="z-portlet-feed" title="RSS feed" href="http://localhost/space/@@feeds/contents">
-        <img src="http://localhost/@@/rss-icon.png" />
-      </a>
-      Recent content
-    </h2>
-    <div class="z-portlet-body">
-      <div class="z-portlet-item odd">
-        <span>
-          <img ... />
-          <a href="http://localhost/space/test/TestContent/">Content 1</a>
-        </span>
-        <div class="z-portlet-item-details">
-          <span ...>...</span> in
-          <a href="http://localhost/space/">Space</a>
-        </div>
-      </div>
-    </div>
+    	<td class="t-title">
+    	  <a href="http://localhost/space/test/TestContent/">Content 1</a>
+    	  <div class="t-byline">
+    ...
+    	    <a href="http://localhost/space/">Space</a>
+    	  </div>
     ...
     </html>
+
 
 
     >>> admin.getLink('Add Test content 2').click()
@@ -251,26 +231,33 @@ Contents rss feed
     <?xml version="1.0" encoding="UTF-8"?>
     <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
       <channel>
-        <title>Recent content - Space</title>
+        <title>Recent content - Space
+    </title>
         <link>http://localhost/space/</link>
         <description>List of recently changed content.</description>
         <atom:link rel="self" type="application/rss+xml"
                    href="http://localhost/space/@@feeds/contents"/>
         <item>
           <title>Content 1 test</title>
-          <description></description>
+          <description type="html"><![CDATA[]]></description>
           <guid isPermaLink="true">http://localhost/space/test/TestContent/</guid>
+    <BLANKLINE>
           <author> (Manager)</author>
+    <BLANKLINE>
           <pubDate>...</pubDate>
         </item>
         <item>
           <title>Content 2</title>
-          <description></description>
+          <description type="html"><![CDATA[]]></description>
           <guid isPermaLink="true">http://localhost/space/test/TestContent2/</guid>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
           <pubDate>...</pubDate>
         </item>
       </channel>
     </rss>
+    <BLANKLINE>
 
 
 Spaces portlet

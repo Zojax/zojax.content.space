@@ -199,51 +199,58 @@ Actions
     >>> print admin.contents
     <html>
     ...
-    <h2 class="z-portlet-header">Actions</h2>
+      <h2 class="z-portlet-header">Actions</h2>
       <div class="z-portlet-body">
         <div class="z-portlet-item">
           <h5 class="z-portlet-item-title">Add content</h5>
           <ul class="z-listing">
             <li class="even">
-               <a href="http://localhost/space/+/content.space/">
-               <img ... />
-               Add Space</a>
-            </li> <li class="odd">
-               <a href="http://localhost/space/test/+/test.content/">
-               <img ... />
-               Add Test content</a>
-            </li> <li class="even">
-               <a href="http://localhost/space/test/+/test.content2/">
-               <img ... />
-               Add Test content 2</a>
-            </li>
+    	  <a href="http://localhost/space/+/content.space/">
+    	    <img src="http://localhost/@@/zojax-content-content_space-zmi_icon.png" alt="content_space" width="16" height="16" border="0" />
+    	    Add Space</a>
+    	</li> <li class="odd">
+    	  <a href="http://localhost/space/test/+/test.content/">
+    	    <img src="http://localhost/@@/zojax-content-type-interfaces-IContentType-zmi_icon.png" alt="ContentType" width="16" height="16" border="0" />
+    	    Add Test content</a>
+    	</li> <li class="even">
+    	  <a href="http://localhost/space/test/+/test.content2/">
+    	    <img src="http://localhost/@@/zojax-content-type-interfaces-IContentType-zmi_icon.png" alt="ContentType" width="16" height="16" border="0" />
+    	    Add Test content 2</a>
+    	</li>
           </ul>
         </div> <div class="z-portlet-item">
           <h5 class="z-portlet-item-title">Manage content</h5>
           <ul class="z-listing">
             <li class="even">
-               <a href="http://localhost/space/context.html">
-               <img ... />
-               Edit Space</a>
-            </li> <li class="odd">
-               <a href="http://localhost/space/delete.html">
-               <img ... />
-               Delete Space</a>
-            </li>
+    	  <a href="http://localhost/space/context.html">
+    	    <img src="http://localhost/@@/zojax-content-space-interfaces-IContentSpace-zmi_icon.png" alt="ContentSpace" width="16" height="16" border="0" />
+    	    Edit Space</a>
+    	</li> <li class="odd">
+    	  <a href="http://localhost/space/delete.html">
+    	    <img src="http://localhost/@@/zojax-content-actions-interfaces-IDeleteContentAction-zmi_icon.png" alt="DeleteContentAction" width="16" height="16" border="0" />
+    	    Delete Space</a>
+    	</li>
+          </ul>
+        </div> <div class="z-portlet-item">
+          <h5 class="z-portlet-item-title">Browse content</h5>
+          <ul class="z-listing">
+            <li class="even">
+    	  <a href="http://localhost/space/browse-documents.html">
+    	    <img src="http://localhost/@@/zojax-content-documents-browser-interfaces-IBrowseDocumentsAction-zmi_icon.png" alt="BrowseDocumentsAction" width="16" height="16" border="0" />
+    	    Browse documents</a>
+    	</li>
           </ul>
         </div> <div class="z-portlet-item">
           <h5 class="z-portlet-item-title">Notifications</h5>
           <ul class="z-listing">
             <li class="even">
-               <a href="http://localhost/space/@@feeds/">
-               <img ... />
-               Subscribe to Feeds</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    	  <a href="http://localhost/space/@@feeds/">
+    	    <img src="http://localhost/@@/zojax-content-feeds-actions-IViewFeedsAction-zmi_icon.gif" alt="ViewFeedsAction" width="16" height="16" border="0" />
+    	    Subscribe to Feeds</a>
+    	</li>
     ...
     </html>
+
 
 
 Edit space action
