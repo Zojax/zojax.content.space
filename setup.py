@@ -93,6 +93,7 @@ setup(name='zojax.content.space',
                                   'zojax.personal.space',
                                   'zojax.personal.content',
                                   'zojax.content.browser',
+                                  'zope.app.file',
                                   ]),
       include_package_data = True,
       zip_safe = False
