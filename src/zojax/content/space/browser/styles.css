@@ -13,7 +13,7 @@
     vertical-align: bottom;
   }
 
-  #z-space .z-space-header h1 a { 
+  #z-space .z-space-header h1 a {
     vertical-align: bottom;
   }
 
@@ -26,7 +26,7 @@
     clear: both;
     border-bottom: 1px solid globalBorderColor;
   }
-  
+
   .z-space-views ul {
     margin: 0;
     padding: 0;
@@ -78,7 +78,7 @@
   #space-columns-table tr {
     vertical-align: top;
   }
-  
+
   #space-columns #z-portal-workspace {
     margin: 0;
   }
@@ -88,22 +88,22 @@
     padding-right: 2em;
     vertical-align: top;
   }
-  
+
   #space-column-two {
     width: 16em;
     padding-left: 2em;
     vertical-align: top;
   }
-  
+
   #space-column-content {
     vertical-align: top;
   }
 
-  #space-column-content .z-portlet { 
+  #space-column-content .z-portlet {
     margin-bottom: 3em;
   }
 
-  #space-column-content .z-portlet-header { 
+  #space-column-content .z-portlet-header {
     border: 0;
     padding: 0.5em;
     font-size: 140%;
@@ -112,23 +112,23 @@
     border-bottom: borderWidth borderStyle globalBorderColor;
   }
 
-  #space-column-content .z-portlet-body { 
+  #space-column-content .z-portlet-body {
     border: 0;
   }
 
-  #space-column-content .portlet-recent-content .z-portlet-feed { 
+  #space-column-content .portlet-recent-content .z-portlet-feed {
     padding-top: 0.25em;
   }
 
-  .portlet-recent-content table { 
+  .portlet-recent-content table {
     width: 99.5%;
     margin: 0 auto;
     border: 0;
     font-size: 95%;
   }
 
-  .portlet-recent-content th, 
-  .portlet-recent-content td { 
+  .portlet-recent-content th,
+  .portlet-recent-content td {
     padding: 0.75em;
   }
 
@@ -194,7 +194,7 @@
   .portlet-recent-content .t-avatar img {
     padding: 2px;
     width: auto;
-    height: 27px;
+    max-height: 27px;
     border: 1px solid globalBorderColor;
   }
 
